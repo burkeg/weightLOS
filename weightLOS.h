@@ -35,7 +35,26 @@ struct food_item
 	double saturated_fat;
 
 };
+
+struct mealPlan {
+	int num_Meals;
+	struct food_item * meals;
+};
+
+struct dayPlan {
+	double num_timeslot;
+	struct schedule * timeslots;
+	
+};
+
+struct schedule {
+	char * activity;
+	double calories_burned;
+	double calories_gained;
+};
 //global varaibles
+#define DAY 24
+#define SEGS 96
 
 //function prototypes
 int readFile(const char * filename, vector<food_item> * file_contents);
