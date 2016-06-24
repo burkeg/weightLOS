@@ -38,12 +38,12 @@ struct food_item
 
 struct mealPlan {
 	int num_Meals;
-	struct food_item * meals;
+	vector<struct food_item> * meals;
 };
 
 struct dayPlan {
 	double num_timeslot;
-	struct schedule * timeslots;
+	vector<struct schedule> * timeslots;
 	
 };
 
