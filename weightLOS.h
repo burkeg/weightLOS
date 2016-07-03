@@ -12,6 +12,8 @@
 using namespace std;
 //structs
 
+typedef vector<vector<char> > dag;
+
 struct health_reg
 {
 	double min_fat;
@@ -55,6 +57,9 @@ struct schedule {
 //global varaibles
 #define DAY 24
 #define SEGS 96
+#define FLAT_FLAG 0x01
+#define DOWN_FLAG 0x02
+#define SET_FLAG  0x04
 
 //function prototypes
 int readFile(const char * filename, vector<food_item> * file_contents);
@@ -70,8 +75,7 @@ double compare_by_Cholesterol(vector<food_item> * data, const void * a, const vo
 double compare_by_Weight(vector<food_item> * data, const void * a, const void * b, bool getA);
 double compare_by_Saturated_Fat(vector<food_item> * data, const void * a, const void * b, bool getA);
 
-
-
+void initialize_DAG(dag* DAG_REF, vector<food_item> * data);
 
 #endif
 
