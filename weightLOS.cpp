@@ -15,8 +15,10 @@
 int main(int argc, char * argv[] ) {
 	vector<food_item> list;// = new food_item[959];
 	readFile("food_call.csv", &list);
-	dag DAG(969, std::vector<char>(460));
-	initialize_DAG(&DAG, &list);
+	dag DAG(ITEM_COUNT, std::vector<char>(FOOD_ENERGY));
+//	initialize_DAG(&DAG, &list);
+	DP dp_table(ITEM_COUNT+1, std::vector<int>(FOOD_ENERGY+1));
+	initialize_DP(&dp_table, &list);
 	quick_sort(&list, compare_by_Weight, 0, list.size()-1);
 	quick_sort(&list, compare_by_Carbohydrates, 0, list.size() - 1);
 	quick_sort(&list, compare_by_Amount, 0, list.size() - 1);

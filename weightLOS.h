@@ -13,6 +13,7 @@ using namespace std;
 //structs
 
 typedef vector<vector<char> > dag;
+typedef vector<vector<int> > DP;
 
 struct health_reg
 {
@@ -60,6 +61,8 @@ struct schedule {
 #define FLAT_FLAG 0x01
 #define DOWN_FLAG 0x02
 #define SET_FLAG  0x04
+#define ITEM_COUNT 969
+#define FOOD_ENERGY 460
 
 //function prototypes
 int readFile(const char * filename, vector<food_item> * file_contents);
@@ -76,6 +79,7 @@ double compare_by_Weight(vector<food_item> * data, const void * a, const void * 
 double compare_by_Saturated_Fat(vector<food_item> * data, const void * a, const void * b, bool getA);
 
 void initialize_DAG(dag* DAG_REF, vector<food_item> * data);
+void initialize_DP(DP* dp_table, vector<food_item> * data);
 
 #endif
 
