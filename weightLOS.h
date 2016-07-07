@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm> 
 #pragma warning( disable : 4996 )
 
 using namespace std;
@@ -14,6 +15,7 @@ using namespace std;
 
 typedef vector<vector<char> > dag;
 typedef vector<vector<int> > DP;
+typedef vector<bool> bits;
 
 struct health_reg
 {
@@ -61,7 +63,7 @@ struct schedule {
 #define FLAT_FLAG 0x01
 #define DOWN_FLAG 0x02
 #define SET_FLAG  0x04
-#define ITEM_COUNT 969
+#define ITEM_COUNT 959
 #define FOOD_ENERGY 460
 
 //function prototypes
@@ -80,6 +82,7 @@ double compare_by_Saturated_Fat(vector<food_item> * data, const void * a, const 
 
 void initialize_DAG(dag* DAG_REF, vector<food_item> * data);
 void initialize_DP(DP* dp_table, vector<food_item> * data);
-
+void printDP(DP* dp_table, vector<food_item> * data);
+void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data);
 #endif
 
