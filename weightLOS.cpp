@@ -30,7 +30,7 @@ int main(int argc, char * argv[] ) {
 	printDP(&dp_table, &list, false);
 	//give_value(&health_needs, &list.at(0), &list.at(1));
 	//*/
-	//*
+	/*
 	vector<food_item> mit_list;
 
 
@@ -78,7 +78,7 @@ int main(int argc, char * argv[] ) {
 	printDP(&mit_dp_table, &mit_list, true);
 	printDP(&mit_dp_table, &mit_list, false);
 	print_solution(&mit_solution, &mit_list);
-	//*/
+	*/
 
 	quick_sort(&list, compare_by_Weight, 0, list.size()-1);
 	quick_sort(&list, compare_by_Carbohydrates, 0, list.size() - 1);
