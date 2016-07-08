@@ -84,5 +84,9 @@ void initialize_DAG(dag* DAG_REF, vector<food_item> * data);
 void initialize_DP(DP* dp_table, vector<food_item> * data);
 void printDP(DP* dp_table, vector<food_item> * data);
 void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data);
+void print_solution(bits* solution, vector<food_item> * data);
+
+
+
 #endif
 

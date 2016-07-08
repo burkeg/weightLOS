@@ -18,9 +18,10 @@ int main(int argc, char * argv[] ) {
 	dag DAG(ITEM_COUNT, std::vector<char>(FOOD_ENERGY));
 //	initialize_DAG(&DAG, &list);
 	DP dp_table(ITEM_COUNT+1, std::vector<int>(FOOD_ENERGY+1));
-//	initialize_DP(&dp_table, &list);// , ITEM_COUNT, FOOD_ENERGY);
-
-
+	initialize_DP(&dp_table, &list);// , ITEM_COUNT, FOOD_ENERGY);
+	bits solution(list.size());
+	extract_solution(&solution, &dp_table, &list);
+	print_solution(&solution, &list);
 	vector<food_item> mit_list;
 
 
@@ -54,8 +55,8 @@ int main(int argc, char * argv[] ) {
 	int knapsack_cap = 10;
 	DP mit_dp_table(mit_list.size() + 1, std::vector<int>(knapsack_cap +1));
 	initialize_DP(&mit_dp_table, &mit_list);// , 3, knapsack_cap);
-	bits solution(mit_list.size());
-	extract_solution(&solution, &mit_dp_table, &mit_list);
+//	bits solution(mit_list.size());
+//	extract_solution(&solution, &mit_dp_table, &mit_list);
 
 
 	quick_sort(&list, compare_by_Weight, 0, list.size()-1);
