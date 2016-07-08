@@ -51,6 +51,7 @@ int readFile(const char * filename, vector<food_item> * file_contents) {
 			pch = strtok(NULL, ",");
 			tmp->saturated_fat = strtod(pch,NULL);
 			
+			tmp->sum_value = 0;
 			file_contents->push_back(*tmp);
 			delete tmp;
 			//cout << line << '\n';

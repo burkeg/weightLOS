@@ -14,20 +14,22 @@ using namespace std;
 //structs
 
 typedef vector<vector<char> > dag;
-typedef vector<vector<int> > DP;
+typedef vector<vector<struct food_item> > DP;
 typedef vector<bool> bits;
 
 struct health_reg
 {
-	double min_fat;
-	double max_fat;
+	bool sex;
+	double fat;
 	double food_energy;
-	double carbs_min;
-	double carbs_perc_min;
-	double carbs_perc_max;
+	double carbs;
+	double protein;
+	double cholesterol;
+	double saturated_fat;
 };
 struct food_item
 {
+	double sum_value;
 	char *name;
 	double amount;
 	char *units;
@@ -39,6 +41,28 @@ struct food_item
 	double weight;
 	double saturated_fat;
 
+	food_item& operator +(const food_item& a)
+	{
+		food_item ret;
+		ret.carbohydrates = this->carbohydrates + a.carbohydrates;
+		ret.cholesterol = this->cholesterol + a.cholesterol;
+		ret.fat = this->fat + a.fat;
+		ret.food_energy = this->food_energy + a.food_energy;
+		ret.protein = this->protein + a.protein;
+		ret.saturated_fat = this->saturated_fat + a.saturated_fat;
+		return ret;
+	}
+
+	food_item& operator +=(const food_item& a)
+	{
+		this->carbohydrates += a.carbohydrates;
+		this->cholesterol += a.cholesterol;
+		this->fat += a.fat;
+		this->food_energy += a.food_energy;
+		this->protein += a.protein;
+		this->saturated_fat += a.saturated_fat;
+		return *this;
+	}
 };
 
 struct mealPlan {
@@ -65,6 +89,8 @@ struct schedule {
 #define SET_FLAG  0x04
 #define ITEM_COUNT 959
 #define FOOD_ENERGY 460
+#define MALE true
+#define FEMALE false
 
 //function prototypes
 int readFile(const char * filename, vector<food_item> * file_contents);
@@ -81,12 +107,12 @@ double compare_by_Weight(vector<food_item> * data, const void * a, const void * 
 double compare_by_Saturated_Fat(vector<food_item> * data, const void * a, const void * b, bool getA);
 
 void initialize_DAG(dag* DAG_REF, vector<food_item> * data);
-void initialize_DP(DP* dp_table, vector<food_item> * data);
-void printDP(DP* dp_table, vector<food_item> * data);
+void initialize_DP(DP* dp_table, vector<food_item> * data, health_reg *needs);
+void printDP(DP* dp_table, vector<food_item> * data, bool byName);
 void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data);
 void print_solution(bits* solution, vector<food_item> * data);
-
-
+void fill_personal_needs(health_reg* needs, double weight_kg, double height_cm, int age, bool sex);
+double give_value(health_reg* needs, food_item* accu_items, food_item* new_item);
 
 #endif
 

@@ -5,3 +5,5 @@ Debug/vc140.idb
 Debug/weightLOS.log
 *.vcxproj
 weightLOS.vcxproj.filters
+DP_Names.csv
+DP_Numbers.csv
