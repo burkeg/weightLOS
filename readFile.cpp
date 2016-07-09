@@ -1,6 +1,7 @@
 #include "weightLOS.h"
 
 
+
 int readFile(const char * filename, vector<food_item> * file_contents) {
 	string line;
 	ifstream myfile(filename);
