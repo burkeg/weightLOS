@@ -19,6 +19,7 @@ typedef vector<bool> bits;
 
 struct health_reg
 {
+	char name[50];
 	bool sex;
 	double fat;
 	double food_energy;
@@ -26,9 +27,12 @@ struct health_reg
 	double protein;
 	double cholesterol;
 	double saturated_fat;
+	double weight;
+	int num_foods;
 };
 struct food_item
 {
+	int count_yes;
 	double sum_value;
 	char *name;
 	double amount;
@@ -50,6 +54,8 @@ struct food_item
 		ret.food_energy = this->food_energy + a.food_energy;
 		ret.protein = this->protein + a.protein;
 		ret.saturated_fat = this->saturated_fat + a.saturated_fat;
+		ret.weight = this->weight + a.weight;
+		ret.count_yes = max(this->count_yes, a.count_yes);
 		return ret;
 	}
 
@@ -61,6 +67,8 @@ struct food_item
 		this->food_energy += a.food_energy;
 		this->protein += a.protein;
 		this->saturated_fat += a.saturated_fat;
+		this->weight += a.weight;
+		this->count_yes = max(this->count_yes, a.count_yes);
 		return *this;
 	}
 };
@@ -111,8 +119,14 @@ void initialize_DP(DP* dp_table, vector<food_item> * data, health_reg *needs);
 void printDP(DP* dp_table, vector<food_item> * data, bool byName);
 void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data);
 void print_solution(bits* solution, vector<food_item> * data);
-void fill_personal_needs(health_reg* needs, double weight_kg, double height_cm, int age, bool sex);
+void fill_personal_needs(health_reg* needs, double weight_kg, double height_cm, int age, int approx_num_items, double weight_per_day, bool sex);
 double give_value(health_reg* needs, food_item* accu_items, food_item* new_item);
+int find_last_max_index(DP* dp_table);
+void print_results(health_reg* needs, bits* solution, vector<food_item> * data);
+double calc_weighting_quad(double thres, double val);
+double calc_weighting_linear(double thres, double val);
+
+
 
 #endif
 

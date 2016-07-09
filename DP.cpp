@@ -5,6 +5,7 @@ void initialize_DP(DP* dp_table, vector<food_item> * data, health_reg *needs) {
 	int max_weight = dp_table->at(0).size()-1;
 	int food_count;
 	int cal_count;
+	/*
 	for (food_count = num_items - 1; food_count >= 0; food_count--) {
 		for (cal_count = 0; cal_count < max_weight + 1; cal_count++) {
 			(*dp_table)[food_count][cal_count].name = "dp_accumulator_item";
@@ -14,8 +15,10 @@ void initialize_DP(DP* dp_table, vector<food_item> * data, health_reg *needs) {
 			(*dp_table)[food_count][cal_count].protein = 0;
 			(*dp_table)[food_count][cal_count].saturated_fat = 0;
 			(*dp_table)[food_count][cal_count].sum_value = 0;
+			(*dp_table)[food_count][cal_count].count_yes = 0;
 		}
 	}
+	//*/
 	for (food_count = num_items - 1; food_count >= 0; food_count--) {
 		for (cal_count = 0; cal_count < max_weight+1; cal_count++) {
 			//(*dp_table)[food_count][cal_count] = food_count*cal_count;
@@ -30,6 +33,7 @@ void initialize_DP(DP* dp_table, vector<food_item> * data, health_reg *needs) {
 				else {
 					food_item temp = data->at(food_count);
 					temp+= (*dp_table)[food_count + 1][cal_count - (int)(data->at(food_count).food_energy) / 5];
+					temp.count_yes = (*dp_table)[food_count + 1][cal_count - (int)(data->at(food_count).food_energy) / 5].count_yes + 1;
 					(*dp_table)[food_count][cal_count] = temp;
 				}
 			}
@@ -72,7 +76,8 @@ void printDP(DP* dp_table, vector<food_item> * data, bool byName) {
 }
 
 void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data) {
-	int weight_count = dp_table->at(0).size() - 1;
+
+	int weight_count = find_last_max_index(dp_table); //dp_table->at(0).size()-1;
 	for (int i = 0; i < (int)dp_table->size()-1; i++) {
 		if ((*dp_table)[i][weight_count].sum_value == (*dp_table)[i + 1][weight_count].sum_value) {
 			//(*solution)[i] = 0;
@@ -83,6 +88,18 @@ void extract_solution(bits* solution, DP* dp_table, vector<food_item> * data) {
 		}
 		
 	}
+}
+
+int find_last_max_index(DP* dp_table) {
+	int index = -1;
+	double max = -1;
+	for (int i = 0; i < dp_table->at(0).size(); i++) {
+		if ((*dp_table)[0][i].sum_value > max) {
+			max = (*dp_table)[0][i].sum_value;
+			index = i;
+		}
+	}
+	return index;
 }
 
 void print_solution(bits* solution, vector<food_item> * data) {

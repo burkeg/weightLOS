@@ -15,19 +15,31 @@
 int main(int argc, char * argv[] ) {
 	vector<food_item> list;// = new food_item[959];
 	readFile("food_call.csv", &list);
-	
-	health_reg health_needs;
-	//fill_personal_needs(&health_needs, 86.1826, 183, 20, MALE);
-	fill_personal_needs(&health_needs, 61, 158, 61, FEMALE);
+	vector<health_reg> profiles;
+	profiles.resize(4);
+	char * profile_names[50] = {"Gabriel", "Lucia", "Average American Male", "Average American Female"};
+	fill_personal_needs(&profiles[0], 86.1826, 183, 20, 7, 2000, MALE); //Gabriel Profile
+	fill_personal_needs(&profiles[1], 61, 158, 61, 7, 2000, FEMALE);   //Lucia Profile
+	fill_personal_needs(&profiles[2], 88.677308, 177, 37.8, 7, 2000, MALE); //Average American Male Profile
+	fill_personal_needs(&profiles[3], 75.387052, 163, 37.8, 7, 2000, FEMALE); //Average American Female Profile
 
-	DP dp_table(ITEM_COUNT+1, std::vector<food_item>(FOOD_ENERGY+1));
-	initialize_DP(&dp_table, &list,&health_needs);// , ITEM_COUNT, FOOD_ENERGY);
-	bits solution(list.size());
-	//*
-	extract_solution(&solution, &dp_table, &list);
-	print_solution(&solution, &list);
-	printDP(&dp_table, &list, true);
-	printDP(&dp_table, &list, false);
+	for (int i = 0; i < profiles.size(); i++) {
+		health_reg health_needs = profiles[i];
+
+
+
+		DP dp_table(ITEM_COUNT + 1, std::vector<food_item>(FOOD_ENERGY + 1));
+		initialize_DP(&dp_table, &list, &health_needs);// , ITEM_COUNT, FOOD_ENERGY);
+		bits solution(list.size());
+		//*
+		extract_solution(&solution, &dp_table, &list);
+		printf("%s's Profile:\n", profile_names[i]);
+		print_solution(&solution, &list);
+		//	printDP(&dp_table, &list, true);
+		//	printDP(&dp_table, &list, false);
+		print_results(&health_needs, &solution, &list);
+		printf("----------------------------------------------------------------------------------\n");
+	}
 	//give_value(&health_needs, &list.at(0), &list.at(1));
 	//*/
 	/*
