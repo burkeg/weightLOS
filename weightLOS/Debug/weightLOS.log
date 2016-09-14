@@ -1,0 +1,6 @@
+﻿  weightLOS.cpp
+c:\users\gabriel\documents\visual studio 2015\projects\weightlos\weightlos\weightlos.cpp(23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\gabriel\documents\visual studio 2015\projects\weightlos\weightlos\weightlos.cpp(24): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\gabriel\documents\visual studio 2015\projects\weightlos\weightlos\weightlos.cpp(26): warning C4018: '<': signed/unsigned mismatch
+  weightLOS.vcxproj -> c:\users\gabriel\documents\visual studio 2015\Projects\weightLOS\Debug\weightLOS.exe
+  weightLOS.vcxproj -> c:\users\gabriel\documents\visual studio 2015\Projects\weightLOS\Debug\weightLOS.pdb (Partial PDB)

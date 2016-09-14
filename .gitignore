@@ -1,9 +1,0 @@
-*.obj
-Debug/vc140.idb
-*.pdb
-*.tlog
-Debug/weightLOS.log
-*.vcxproj
-weightLOS.vcxproj.filters
-DP_Names.csv
-DP_Numbers.csv
